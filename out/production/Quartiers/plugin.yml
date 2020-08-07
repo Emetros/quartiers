@@ -1,0 +1,39 @@
+name: Quartiers
+desc: Allows you to create a ressource generator in your server
+main: fr.emetros.quartiers.main
+version: 0.1
+api-version: 1.16
+commands:
+  createquartier:
+    basic: createquartier
+    description: /createquartier area_name  type coords_of_the_chest
+    permission: quartiers.createquartier
+    permission-message: You are not allowed to create a ressource generator !
+  disablequartier:
+    basic: createquartier
+    description: /createquartier area_name
+    usage: /createquartier area_name
+    permission: quartiers.disablequartier
+    permission-message: You are not allowed to delete a ressource generator !
+  quartiers:
+    basic: quartiers reload
+    description: Allow you to reload ressource generators
+    usage: /quartiers reload
+    permission: quartiers.reload
+    permission-message: You are not allowed to reload Quartiers !
+permissions:
+  quartiers.*:
+    description: Allows you to use all quartiers's commands
+    children:
+      quartiers.createquartier: true
+      quartiers.disablequartier: true
+      quartiers.reload: true
+  quartiers.createquartier:
+    description: Allows you to create a ressource generator
+    default: op
+  quartiers.disablequartier:
+    description: Allows you to disable a ressource generator
+    default: op
+  quartiers.reload:
+    description: Allows you to reload Quartiers
+    default: op
