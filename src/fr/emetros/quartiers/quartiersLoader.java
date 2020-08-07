@@ -1,7 +1,6 @@
 package fr.emetros.quartiers;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -27,7 +26,7 @@ public class quartiersLoader {
             public void run() {
                 File folder = new File("plugins/Quartiers/Generators");
                 File[] dirListing = folder.listFiles();
-                if (dirListing != null && folder.length() > 0) {
+                if (dirListing != null && dirListing.length > 0) {
                     int taskID = 0;
                     for (File generatorList : dirListing) {
 
@@ -36,47 +35,55 @@ public class quartiersLoader {
                         FileConfiguration config = YamlConfiguration.loadConfiguration(generatorList);
 
                         String a = config.getString("area");
-                        String stringT = config.getString(a + "-values.material");
-                        String integerX = config.getString(a + "-values.x");
-                        String integerY = config.getString(a + "-values.y");
-                        String integerZ = config.getString(a + "-values.z");
-                        String world = config.getString(a + "-values.world");
-                        String amount = config.getString(a + "-values.amount");
-                        String time = config.getString(a + "-values.time");
+                        int isEnabled = config.getInt(a + "-values.isEnabled");
 
-                        taskID = taskID++;
+                        if(isEnabled == 1){
 
-                        listID.add(taskID);
+                            String stringT = config.getString(a + "-values.material");
+                            String integerX = config.getString(a + "-values.x");
+                            String integerY = config.getString(a + "-values.y");
+                            String integerZ = config.getString(a + "-values.z");
+                            String world = config.getString(a + "-values.world");
+                            String amount = config.getString(a + "-values.amount");
+                            String time = config.getString(a + "-values.time");
+
+                            taskID = taskID++;
+
+                            listID.add(taskID);
 
 
-                        int x = Integer.parseInt(integerX);
-                        int y = Integer.parseInt(integerY);
-                        int z = Integer.parseInt(integerZ);
-                        int q = Integer.parseInt(amount);
-                        int timeInt = Integer.parseInt(time);
-                        stringT = stringT.toUpperCase();
+                            int x = Integer.parseInt(integerX);
+                            int y = Integer.parseInt(integerY);
+                            int z = Integer.parseInt(integerZ);
+                            int q = Integer.parseInt(amount);
+                            int timeInt = Integer.parseInt(time);
+                            stringT = stringT.toUpperCase();
 
-                        Material t = Material.getMaterial(stringT);
+                            Material t = Material.getMaterial(stringT);
 
-                        if (t != null) {
-                            ItemStack i = new ItemStack(t, q);
-                            World w = Bukkit.getWorld(world);
-                            Block b = w.getBlockAt(x, y, z);
-                            Chest c = (Chest) b.getState();
-                            if (b.getType() == Material.CHEST) {
-                                listID.set(taskID, scheduler.scheduleSyncRepeatingTask(main.getInstance(), new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        c.getBlockInventory().addItem(i);
-                                    }
-                                }, 1, timeInt));
-                            } else {
-                                main.getInstance().getLogger();
+                            if (t != null) {
+                                ItemStack i = new ItemStack(t, q);
+                                World w = Bukkit.getWorld(world);
+                                Block b = w.getBlockAt(x, y, z);
+                                Chest c = (Chest) b.getState();
+                                if (b.getType() == Material.CHEST) {
+                                    listID.set(taskID, scheduler.scheduleSyncRepeatingTask(main.getInstance(), new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            c.getBlockInventory().addItem(i);
+                                        }
+                                    }, 1, timeInt));
+                                } else {
+                                    main.getInstance().getLogger();
+                                }
                             }
+                        } else {
                         }
+
                     }
+                } else {
+                    log.info("[Quartiers] No generators loaded");
                 }
-                log.info("[Quartiers] No generators loaded");
             }
         }, 1);
     }

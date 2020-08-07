@@ -1,32 +1,31 @@
 name: Quartiers
 desc: Allows you to create a ressource generator in your server
 main: fr.emetros.quartiers.main
-version: 0.1
+version: 1.0
 api-version: 1.16
 commands:
-  createquartier:
-    basic: createquartier
+  quartierscreate:
+    basic: quartierscreate
     description: /createquartier area_name  type coords_of_the_chest
-    permission: quartiers.createquartier
+    permission: quartiers.create
     permission-message: You are not allowed to create a ressource generator !
-  disablequartier:
-    basic: createquartier
-    description: /createquartier area_name
-    usage: /createquartier area_name
-    permission: quartiers.disablequartier
-    permission-message: You are not allowed to delete a ressource generator !
+  quartiersdisable:
+    basic: quartiersdisable
+    description: /disablequartier area_name
+    permission: quartiers.disable
+    permission-message: You are not allowed to disable a ressource generator !
   quartiersreload:
-    basic: quartiers reload
+    basic: quartiersreload
     description: Allow you to reload ressource generators
     permission: quartiers.reload
     permission-message: You are not allowed to reload Quartiers !
-  quartiers load:
-    basic: quartiers load
+  quartiersenable:
+    basic: quartiersenable
     description: Allow you to load a specific ressource generator
-    permission: quartiers.load
+    permission: quartiers.enable
     permission-message: You are not allowed to load a generator !
   quartierslist:
-    basic: quartiers list
+    basic: quartierslist
     description: Lists the generators that you've created
     permission: quartiers.list
     permission-message: You are not allowed to list generators !
@@ -34,15 +33,23 @@ permissions:
   quartiers.*:
     description: Allows you to use all quartiers's commands
     children:
-      quartiers.createquartier: true
-      quartiers.disablequartier: true
+      quartiers.create: true
+      quartiers.disable: true
       quartiers.reload: true
-  quartiers.createquartier:
+      quartiers.enable: true
+      quartiers.list: true
+  quartiers.create:
     description: Allows you to create a ressource generator
     default: op
-  quartiers.disablequartier:
+  quartiers.disable:
     description: Allows you to disable a ressource generator
     default: op
   quartiers.reload:
     description: Allows you to reload Quartiers
+    default: op
+  quartiers.enable:
+    description: Allows you to enable a ressource generator
+    default: op
+  quartiers.list:
+    description: Allows you to get the list of all the generators
     default: op

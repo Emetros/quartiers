@@ -16,7 +16,15 @@ public class quartiersList {
         for(File getID: dirList) {
             FileConfiguration config = YamlConfiguration.loadConfiguration(getID);
             areaName = config.getString("area");
-            player.sendMessage(ChatColor.GREEN + areaName);
+            int isEnabled = config.getInt(areaName + "-values.isEnabled");
+
+            if(isEnabled == 1) {
+                player.sendMessage(ChatColor.GREEN + areaName);
+            }
+            if(isEnabled == 0) {
+                player.sendMessage(ChatColor.RED + areaName);
+            }
+
         }
     }
 }

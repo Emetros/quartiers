@@ -17,9 +17,11 @@ public class main extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        this.getCommand("createquartier").setExecutor(new commands(this));
+        this.getCommand("quartierscreate").setExecutor(new commands(this));
         this.getCommand("quartiersreload").setExecutor(new commands(this));
         this.getCommand("quartierslist").setExecutor(new commands(this));
+        this.getCommand("quartiersenable").setExecutor(new commands(this));
+        this.getCommand("quartiersdisable").setExecutor(new commands(this));
         instance = this;
         new quartiersLoader();
     }

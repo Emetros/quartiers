@@ -69,7 +69,7 @@ public class quartiersCreate {
                     config.set(a + "-values.world", world);
                     config.set(a + "-values.amount", amount);
                     config.set(a + "-values.time", time);
-                    config.set(a + "-values.id", 1);
+                    config.set(a + "-values.isEnabled", 1);
 
                     try {
                         config.save(f);
@@ -140,6 +140,7 @@ public class quartiersCreate {
                     config.set(a + "-values.world", world);
                     config.set(a + "-values.amount", amount);
                     config.set(a + "-values.time", "72000");
+                    config.set(a + "-values.isEnabled", "1");
 
                     try {
                         config.save(f);

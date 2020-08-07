@@ -11,5 +11,5 @@
 # world: world
 # amount: '1'
 # time: '72000'
-#
+# isEnabled : '1'
 # 72000 is the default value, 72000 ticks equals to 1 hour
