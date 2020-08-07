@@ -60,21 +60,11 @@ public class commands implements CommandExecutor {
             }
         }
         if(command.getName().equalsIgnoreCase("quartierslist")) {
-            if(strings[0].equalsIgnoreCase("list")) {
-                if(commandSender instanceof Player) {
-                    Player player = (Player) commandSender;
+            if(commandSender instanceof Player) {
+                Player player = (Player) commandSender;
 
-                    if(player.hasPermission("quartiers.list") || player.isOp()) {
-                        File folder = new File("plugins/Quartiers/Generators");
-                        File[] dirListing = folder.listFiles();
-                        int fileID = 0;
-                        if(dirListing != null) {
-
-                            String fileName = dirListing[fileID].toString();
-                            player.sendMessage("" + fileName);
-                            fileID = fileID++;
-                        }
-                    }
+                if(player.hasPermission("quartiers.list") || player.isOp()) {
+                    new quartiersList(player);
                 }
             }
         }
