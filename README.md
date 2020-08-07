@@ -1,4 +1,4 @@
-# quartiers
+# Quartiers
 Autofilling chests plugin
 
 A plugin which allows you to fill an entire chest automatically with the stuff you need. You can set an item, a time between each fill, an amount, and the coordinates
