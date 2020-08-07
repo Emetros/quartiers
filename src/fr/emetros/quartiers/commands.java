@@ -67,8 +67,12 @@ public class commands implements CommandExecutor {
                     if(player.hasPermission("quartiers.list") || player.isOp()) {
                         File folder = new File("plugins/Quartiers/Generators");
                         File[] dirListing = folder.listFiles();
+                        int fileID = 0;
                         if(dirListing != null) {
-                            player.sendMessage("" + dirListing);
+
+                            String fileName = dirListing[fileID].toString();
+                            player.sendMessage("" + fileName);
+                            fileID = fileID++;
                         }
                     }
                 }
