@@ -12,6 +12,7 @@ public class quartiersList {
         String areaName;
         File folder = new File("plugins/Quartiers/Generators");
         File[] dirList = folder.listFiles();
+        player.sendMessage(ChatColor.GREEN + "Quartiers that are loaded :");
         for(File getID: dirList) {
             FileConfiguration config = YamlConfiguration.loadConfiguration(getID);
             areaName = config.getString("area");
