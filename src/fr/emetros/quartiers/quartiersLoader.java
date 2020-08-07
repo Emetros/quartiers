@@ -72,7 +72,7 @@ public class quartiersLoader {
                                         public void run() {
                                             c.getBlockInventory().addItem(i);
                                         }
-                                    }, 1, timeInt));
+                                    }, timeInt, timeInt));
                                 } else {
                                     main.getInstance().getLogger();
                                 }
