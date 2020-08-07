@@ -1,6 +1,7 @@
 package fr.emetros.quartiers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -20,16 +21,16 @@ public class quartiersLoader {
 
         ArrayList<Integer> listID = new ArrayList<Integer>();
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        Logger log = Bukkit.getLogger();
         scheduler.scheduleSyncDelayedTask(main.getInstance(), new Runnable() {
             @Override
             public void run() {
                 File folder = new File("plugins/Quartiers/Generators");
                 File[] dirListing = folder.listFiles();
-                if (dirListing != null) {
+                if (dirListing != null && folder.length() > 0) {
                     int taskID = 0;
                     for (File generatorList : dirListing) {
 
-                        Logger log = Bukkit.getLogger();
                         log.info("" + generatorList);
 
                         FileConfiguration config = YamlConfiguration.loadConfiguration(generatorList);
@@ -75,7 +76,7 @@ public class quartiersLoader {
                         }
                     }
                 }
-
+                log.info("[Quartiers] No generators loaded");
             }
         }, 1);
     }
