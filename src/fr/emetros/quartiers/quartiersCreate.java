@@ -13,9 +13,9 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.io.IOException;
 
-public class ressourceGenerator {
+public class quartiersCreate {
 
-    public ressourceGenerator(String a, String stringT, String amount, String integerX,String integerY,String integerZ, String time, String world, Player player){
+    public quartiersCreate(String a, String stringT, String amount, String integerX, String integerY, String integerZ, String time, String world, Player player){
         int x = Integer.parseInt(integerX);
         int y = Integer.parseInt(integerY);
         int z = Integer.parseInt(integerZ);
@@ -69,13 +69,15 @@ public class ressourceGenerator {
                     config.set(a + "-values.world", world);
                     config.set(a + "-values.amount", amount);
                     config.set(a + "-values.time", time);
+                    config.set(a + "-values.id", 1);
 
                     try {
                         config.save(f);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    new ressourceGeneratorLoader(stringT, amount, integerX, integerY, integerZ, time, world);
+                    Bukkit.getScheduler().cancelTasks(main.getInstance());
+                    new quartiersLoader();
                     player.sendMessage(ChatColor.GREEN + "A new resources generator has been added");
                 }
             } else {
@@ -84,7 +86,7 @@ public class ressourceGenerator {
         }
     }
 
-    public ressourceGenerator(String a, String stringT, String amount, String integerX,String integerY,String integerZ, String world, Player player){
+    public quartiersCreate(String a, String stringT, String amount, String integerX, String integerY, String integerZ, String world, Player player){
         int x = Integer.parseInt(integerX);
         int y = Integer.parseInt(integerY);
         int z = Integer.parseInt(integerZ);
@@ -144,7 +146,8 @@ public class ressourceGenerator {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    new ressourceGeneratorLoader(stringT, amount, integerX, integerY, integerZ, "7200", world);
+                    Bukkit.getScheduler().cancelTasks(main.getInstance());
+                    new quartiersLoader();
                     player.sendMessage(ChatColor.GREEN + "A new resources generator has been added");
                 }
             } else {

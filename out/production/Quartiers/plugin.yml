@@ -15,12 +15,21 @@ commands:
     usage: /createquartier area_name
     permission: quartiers.disablequartier
     permission-message: You are not allowed to delete a ressource generator !
-  quartiers:
+  quartiersreload:
     basic: quartiers reload
     description: Allow you to reload ressource generators
-    usage: /quartiers reload
     permission: quartiers.reload
     permission-message: You are not allowed to reload Quartiers !
+  quartiers load:
+    basic: quartiers load
+    description: Allow you to load a specific ressource generator
+    permission: quartiers.load
+    permission-message: You are not allowed to load a generator !
+  quartierslist:
+    basic: quartiers list
+    description: Lists the generators that you've created
+    permission: quartiers.list
+    permission-message: You are not allowed to list generators !
 permissions:
   quartiers.*:
     description: Allows you to use all quartiers's commands

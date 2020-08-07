@@ -8,12 +8,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+
 
 public class commands implements CommandExecutor {
     private final main plugin;
 
     public commands(main plugin){
-        this.plugin= plugin;
+        this.plugin = plugin;
     }
 
     @Override
@@ -33,12 +35,12 @@ public class commands implements CommandExecutor {
                     if (strings.length == 7) {
                         World w = player.getWorld();
                         String world = w.getName();
-                        new ressourceGenerator(strings[0], strings[1], strings[2], strings[3], strings[4], strings[5], strings[6], world, player);
+                        new quartiersCreate(strings[0], strings[1], strings[2], strings[3], strings[4], strings[5], strings[6], world, player);
                     }
                     if (strings.length == 6) {
                         World w = player.getWorld();
                         String world = w.getName();
-                        new ressourceGenerator(strings[0], strings[1], strings[2], strings[3], strings[4], strings[5], world, player);
+                        new quartiersCreate(strings[0], strings[1], strings[2], strings[3], strings[4], strings[5], world, player);
                     }
                 } else {
                 }
@@ -46,19 +48,31 @@ public class commands implements CommandExecutor {
             }
         }
 
-        if(command.getName().equalsIgnoreCase("quartiers")) {
+        if(command.getName().equalsIgnoreCase("quartiersreload")) {
             if(commandSender instanceof Player){
                 Player player = (Player) commandSender;
                 if(player.hasPermission("quartiers.reload") || player.isOp()) {
-                    Bukkit.getScheduler().cancelTask(main.getInstance().getScheduledTask());
-                    main.getInstance().startGenerator();
+                    Bukkit.getScheduler().cancelTasks(main.getInstance());
+                    new quartiersLoader();
                     player.sendMessage(ChatColor.GREEN + "Quartiers reloaded");
                 }
             } else {
-                Bukkit.getScheduler().cancelTask(main.getInstance().getScheduledTask());
-                main.getInstance().startGenerator();
             }
+        }
+        if(command.getName().equalsIgnoreCase("quartierslist")) {
+            if(strings[0].equalsIgnoreCase("list")) {
+                if(commandSender instanceof Player) {
+                    Player player = (Player) commandSender;
 
+                    if(player.hasPermission("quartiers.list") || player.isOp()) {
+                        File folder = new File("plugins/Quartiers/Generators");
+                        File[] dirListing = folder.listFiles();
+                        if(dirListing != null) {
+                            player.sendMessage("" + dirListing);
+                        }
+                    }
+                }
+            }
         }
 
         return false;
